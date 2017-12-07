@@ -24,7 +24,7 @@ if (equals(method, "POST", false) && compareURI("/register/")) {
 
     // short int newIndex = User :: total; // some problem..
     User* usr = User :: addUser(name, username, pin, deviceUUId);
-    if (!usr) {
+    if (usr) {
         send("{\"success\": true, \"message\": \"Registration Successful!\"}");
     } else {
         send("{\"success\": false, \"message\": \"Registration Failed!\"}");
