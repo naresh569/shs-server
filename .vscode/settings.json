@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "system_error": "cpp",
+        "initializer_list": "cpp"
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Disabled"
+}

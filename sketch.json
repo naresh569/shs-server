@@ -1,0 +1,36 @@
+{
+    "cpu": {
+        "name": "Arduino Due (Programming Port)",
+        "com_name": "/dev/ttyACM0",
+        "fqbn": "arduino:sam:arduino_due_x_dbg",
+        "arch": "sam",
+        "network": false,
+        "upload": [
+            {
+                "commandline": "\"{runtime.tools.bossac.path}/bossac\" {upload.verbose} --port={serial.port.file} -U false -e -w -v -b \"{build.path}/{build.project_name}.bin\" -R",
+                "ext": ".bin",
+                "flavour": "default",
+                "options": {
+                    "maximum_size": "524288",
+                    "native_usb": "false",
+                    "protocol": "sam-ba",
+                    "signature": "03a7848cecb619e59f73e7fc73c051e6e7d953e55c56b4d29328218a87956e4e7675ba138d4ee5290516bed075722326bec7395e71af06b39f9b091f22e0c9afff3c333e05574ccc2b4279316df969ac741cced0d222ec02da77a795c3f0419ae2f54423dee744dc3f1866f1098a076e08a9c56a100a8255527ef0dcac9afb9dd561c3cc5342ea3cd44c71e827689749c25a856c8cec5da507d86fb800283757df68e12b5e5e03b315678ac829d2a05edc5da8b872efac4e1dfccaaa571affb12eb63932d0767d74e85fed90d7b655f39ae384deaa5e16b375abd9e08eee315842c72132548d6b9bf3b525c0286529d94e216c4ce3c78746c331126a00b30f73",
+                    "tool": "bossac",
+                    "use_1200bps_touch": "true",
+                    "wait_for_upload_port": "false"
+                },
+                "params": {
+                    "quiet": "",
+                    "verbose": "-i -d",
+                    "verify": "-v"
+                },
+                "tool": "bossac",
+                "tool_version": "1.6.1-arduino",
+                "package": "arduino"
+            }
+        ],
+        "flavour": "default",
+        "isOpen": false,
+        "port": ""
+    }
+}

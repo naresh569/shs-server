@@ -1,0 +1,88 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceRoot}",
+                "/usr/include",
+                "/usr/local/include"
+            ],
+            "defines": [],
+            "browse": {
+                "path": [
+                    "/usr/include",
+                    "/usr/local/include",
+                    "${workspaceRoot}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "intelliSenseMode": "clang-x64",
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ]
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceRoot}",
+                "/usr/include/c++/5",
+                "/usr/include/x86_64-linux-gnu/c++/5",
+                "/usr/local/include",
+                "/usr/include",
+                "/usr/include/x86_64-linux-gnu",
+                "/usr/share/arduino/libraries",
+                "/usr/share/arduino/hardware/arduino/cores/arduino",
+                "/usr/share/arduino/hardware/arduino/cores/robot"
+            ],
+            "defines": [],
+            "browse": {
+                "path": [
+                    "/usr/include/c++/5",
+                    "/usr/include/x86_64-linux-gnu/c++/5",
+                    "/usr/local/include",
+                    "/usr/include",
+                    "/usr/include/x86_64-linux-gnu",
+                    "/usr/share/arduino/libraries",
+                    "/usr/share/arduino/hardware/arduino/cores/arduino",
+                    "/usr/share/arduino/hardware/arduino/cores/robot",
+                    "${workspaceRoot}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "intelliSenseMode": "clang-x64"
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceRoot}",
+                "C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino",
+                "C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries",
+                "C:/Program Files (x86)/Arduino/libraries",
+                "C:/Program Files (x86)/Arduino/hardware/arduino",
+                "C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include",
+                "C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE"
+            ],
+            "browse": {
+                "path": [
+                    "${workspaceRoot}",
+                    "C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino/*",
+                    "C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/*",
+                    "C:/Program Files (x86)/Arduino/libraries/*",
+                    "C:/Program Files (x86)/Arduino/hardware/arduino/*",
+                    "C:/Program Files (x86)/Arduino/hardware/tools/*"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "intelliSenseMode": "msvc-x64"
+        }
+    ],
+    "version": 3
+}
