@@ -9,4 +9,6 @@
 #define MAXSWITCHES 50
 #define MAXUSERS 10
 
+#define LENGTHTOKEN 50
+
 #define SERVER_PORT 5690

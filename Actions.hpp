@@ -50,15 +50,15 @@ if (equals(method, "POST", false) && compareURI("/authenticate/")) {
         return;
     }
 
-    Serial.println(pin);
-    Serial.println(deviceUUId);
+    // Serial.println(pin);
+    // Serial.println(deviceUUId);
 
     short int index = -1;
     for (int i = 0; i < User :: total; i++) {
         if (equals(users[i]->deviceUUId, deviceUUId, true)) {
-            Serial.println(" > User found..");
-            Serial.print(" > user: ");
-            Serial.println(users[i]->name);
+            // Serial.println(" > User found..");
+            // Serial.print(" > user: ");
+            // Serial.println(users[i]->name);
             index = i;
             break; // first occurence
         }
@@ -84,10 +84,12 @@ if (equals(method, "POST", false) && compareURI("/authenticate/")) {
     }
 
     Serial.println(" > Login successful..");
-    randNumber = random(300);
+    Session* s = Session :: createSession(users[index]->_id);
+    char* token = s->getToken();
+    Session :: display();
     write("{\"success\":true, \"message\": \"Login Successful.\", ");
     write("\"token\": \"");
-    write(randNumber);
+    write(token);
     write("\", \"userId\": ");
     write(users[index]->_id);
     write("}");
