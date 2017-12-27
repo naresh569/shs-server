@@ -19,6 +19,7 @@ class Session {
         static int total;
         static Session* createSession(int);
         static void display();
+        static int getUserId(char*);
 } *sessions[MAXUSERS];
 
 int Session :: total = 0;
@@ -117,4 +118,30 @@ void Session :: display() {
         Serial.println(sessions[i]->token);
     }
     Serial.println();
+}
+
+int Session :: getUserId(char* tk) {
+    if (!tk) {
+        Serial.println(" > ERROR: Given token is invalid!");
+        return 0;
+    }
+
+    int t = total;
+    if (!t) {
+        Serial.println(" > ERROR: No sessions available!");
+        return 0;
+    }
+
+    int userId = 0;
+    for(int i = 0; i < MAXUSERS; i++) {
+        if (sessions[i] == NULL)
+        continue;
+
+        if (equals(sessions[i]->token, tk, true)) {
+            userId = sessions[i]->userId;
+            break;
+        }
+    }
+
+    return userId;
 }

@@ -84,16 +84,19 @@ User* User :: addUser(const char *pname, const char *puname, const char *ppin, c
     if (index > -1) {
         // User already exists
         // return 1;
+        Serial.println(" > ERROR: User already exists..");
         return NULL;
     }
 
     if (total == MAXUSERS) {
         // No place for new user
         // return 2;
+        Serial.println(" > ERROR: Limit for max users reached..");
         return NULL;
     }
 
     users[total] = new User (pname, puname, ppin, uuid);
+    Serial.println(" > SUCCESS: User created successfully..");
     return users[total];
 
 }

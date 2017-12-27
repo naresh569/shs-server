@@ -1,8 +1,8 @@
 
 #pragma once
 #include "Config.hpp"
+#include "HTTP/Headers.hpp"
 
-int randNumber;
 class HTTP {
     private:
         EthernetClient *client;
@@ -17,6 +17,8 @@ class HTTP {
         char method[SIZESHORT];
         char uri[SIZENORMAL]; // Uniform Resource Identifier
         char version[SIZESHORT];
+
+        Headers* headers;
         char* reqBody;
 
         char params[SIZENORMAL * 2];
@@ -35,19 +37,21 @@ class HTTP {
         void send(char *);
         void write(int);
         void write(char *);
-        void headers();
+        void addHeaders();
 
+        int secure();
         void process();
         char* getParamValue(const char *);
         bool compareURI(const char *);
 };
-HTTP :: ~HTTP() {}
 
 HTTP :: HTTP(EthernetClient *c) {
     client = c;
     lseek = false;
     chunked = false;
     statusCode = 404;
+
+    headers = new Headers;
 
     reqBody = NULL;
 
@@ -56,17 +60,22 @@ HTTP :: HTTP(EthernetClient *c) {
     params[1] = 0;
 
     int resCode = readRequest();
-    if(resCode == 200){ // on compilation success
-        Serial.print(" >>> ");
-        Serial.print(method);
-        Serial.print(" ");
-        Serial.print(uri);
-        Serial.print(" ");
-        Serial.println(version);
+    if (resCode == 200) { // on compilation success
+        // Serial.print(" >>> ");
+        // Serial.print(method);
+        // Serial.print(" ");
+        // Serial.print(uri);
+        // Serial.print(" ");
+        // Serial.println(version);
         process();  // PROBLEMATIC STATEMENT
     } else {
         send(resCode); // Bad request
     }
+}
+
+HTTP :: ~HTTP() {
+    delete headers;
+    delete reqBody;
 }
 
 int HTTP :: readRequest() {
@@ -77,6 +86,11 @@ int HTTP :: readRequest() {
 
     short int stage = 0;
     int i = 0;
+
+    char tempHeaderName[SIZENORMAL];
+    int lenTempHeaderName = 0;
+    char tempHeaderValue[SIZELONG]; 
+    int lenTempHeaderValue = 0;
 
     while (true) {
         if (stage == 0) {
@@ -112,6 +126,9 @@ int HTTP :: readRequest() {
 
             // Serial.print(" > Method: ");
             // Serial.println(method);
+            Serial.println();
+            Serial.print(method);
+            Serial.print(" ");
         }
 
         if (stage == 1) {
@@ -152,6 +169,9 @@ int HTTP :: readRequest() {
 
             // Serial.print(" > URI: ");
             // Serial.println(uri);
+
+            Serial.print(uri);
+            Serial.print(" ");
         }
 
         if (stage == 2) {
@@ -187,6 +207,8 @@ int HTTP :: readRequest() {
 
             // Serial.print(" > Version: ");
             // Serial.println(version);
+
+            Serial.println(version);
         }
 
         if (stage == 3) {
@@ -230,7 +252,6 @@ int HTTP :: readRequest() {
 
         if (stage == 5) {
             i = 0;
-            char headerName[SIZENORMAL];
             do {
                 c = getChar();
 
@@ -247,26 +268,27 @@ int HTTP :: readRequest() {
                     return 400;
                 }
 
-                headerName[i++] = c;
+                tempHeaderName[i++] = c;
             } while (true);
             
             if (i == 0) {
-                // There is nothing in headerName but it ended with : char
+                // There is nothing in tempHeaderName but it ended with : char
                 // Serial.println(" > ERROR: 400 Bad Request");
                 return 400;
             }
             
-            headerName[i] = 0;
+            tempHeaderName[i] = 0;
+            lenTempHeaderName = i;
             stage = 6;
 
-            // // Serial.print(" > Header-Name: ");
-            // Serial.print(headerName);
+            // Serial.print(tempHeaderName);
             // Serial.print(" (");
             // Serial.print(i);
-            // Serial.println(")");
+            // Serial.print(") ");
+            // Serial.print(": ");
 
 
-            if (equals(headerName, "Content-Length", false)) {
+            if (equals(tempHeaderName, "Content-Length", false)) {
                 // Serial.println(" > Content-Length found..");
                 contentLength = 0; // Content-Length exists and yet to read it's value
             }
@@ -293,7 +315,6 @@ int HTTP :: readRequest() {
         if (stage == 7) {
             // Reading the Header-Value
             i = 0;
-            char headerValue[SIZELONG];
             do {
                 c = getChar();
 
@@ -310,29 +331,42 @@ int HTTP :: readRequest() {
                     return 400;
                 }
 
-                headerValue[i++] = c;
+                tempHeaderValue[i++] = c;
             } while (true);
             
             if (i == 0) {
-                // There is nothing in headerValue but it ended with \r char
+                // There is nothing in tempHeaderValue but it ended with \r char
                 // Serial.println(" > ERROR: 400 Bad Request");
                 return 400;
             }
 
-            headerValue[i] = 0;
+            tempHeaderValue[i] = 0;
+            lenTempHeaderValue = i;
             stage = 8;
 
-            // Serial.print(" > Header-Value: ");
-            // Serial.print(headerValue);
+            // Serial.print(tempHeaderValue);
             // Serial.print(" (");
             // Serial.print(i);
-            // Serial.println(")");
+            // Serial.print(") ");
+            // Serial.println();
 
+            // Serial.print(tempHeaderName);
+            // Serial.print(" (");
+            // Serial.print(lenTempHeaderName);
+            // Serial.print(") ");
+            // Serial.print(": ");
+            // Serial.print(tempHeaderValue);
+            // Serial.print(" (");
+            // Serial.print(lenTempHeaderValue);
+            // Serial.print(") ");
+            // Serial.println();
+
+            headers->put(lenTempHeaderName, tempHeaderName, lenTempHeaderValue, tempHeaderValue);
 
             if (contentLength == 0) {
                 // Serial.print(" > Value of Content-Length: ");
                 // Serial.println(headerValue);
-                contentLength = toInt(headerValue);
+                contentLength = toInt(tempHeaderValue);
             }
         }
 
@@ -406,7 +440,7 @@ int HTTP :: readRequest() {
 
             reqBody[i] = 0;
 
-            Serial.print(" > reqBody: ");
+            Serial.print(" > BODY: ");
             Serial.println(reqBody);
 
             // Serial.println(" > Request completed..!");
@@ -669,7 +703,7 @@ void HTTP :: send(){
     client->print(" ");
     client->println(reasonPhrase);
 
-    headers();
+    addHeaders();
 
     int contentLength = length(resBody);
     if(contentLength > 0){
@@ -735,7 +769,7 @@ void HTTP :: write(char *arg){
         client->print(statusCode);
         client->println(reasonPhrase);
 
-        headers();
+        addHeaders();
 
         client->println("Transfer-Encoding: chunked");
         client->println("Content-Type: application/json");
@@ -753,7 +787,7 @@ void HTTP :: write(char *arg){
     // Serial.println(arg);
 }
 
-void HTTP :: headers() {
+void HTTP :: addHeaders() {
     client->println("Connection: close");
     client->println("Access-Control-Allow-Origin: *");
     client->println("Access-Control-Allow-Methods: PUT");

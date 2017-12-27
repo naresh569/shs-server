@@ -1,5 +1,19 @@
 #include "HTTP.hpp"
 
+int HTTP :: secure() {
+    /* 
+        This method always returns userId if it secure
+        otherwise 0 - ZERO
+     */
+    int userId = 0;
+    Header* h = headers->get("Authorization");
+    if (h) {
+        userId = Session :: getUserId(h->value);
+    }
+
+    return userId;
+}
+
 void HTTP :: process() {
 
 if (equals(method, "OPTIONS", false)) {
@@ -86,7 +100,7 @@ if (equals(method, "POST", false) && compareURI("/authenticate/")) {
     Serial.println(" > Login successful..");
     Session* s = Session :: createSession(users[index]->_id);
     char* token = s->getToken();
-    Session :: display();
+    // Session :: display();
     write("{\"success\":true, \"message\": \"Login Successful.\", ");
     write("\"token\": \"");
     write(token);
@@ -98,6 +112,12 @@ if (equals(method, "POST", false) && compareURI("/authenticate/")) {
 }
 
 if (equals(method, "GET", false) && compareURI("/overview/")) {
+    int userId = secure();
+    if (!userId) {
+        send(401);
+        return;
+    }
+
     write("{\"switches\":{\"sActive\":");
     int total = Switch :: total;
     int active = 0;
@@ -114,6 +134,12 @@ if (equals(method, "GET", false) && compareURI("/overview/")) {
 }
 
 if (equals(method, "GET", false) && compareURI("/blocks/")) {
+    int userId = secure();
+    if (!userId) {
+        send(401);
+        return;
+    }
+
     write("[");
     short int total = Block :: total;
     for (short int i = 0; i < total; i++) {
@@ -149,6 +175,12 @@ if (equals(method, "GET", false) && compareURI("/blocks/")) {
 }
 
 if (equals(method, "GET", false) && compareURI("/blocks/:bid/")) {
+    int userId = secure();
+    if (!userId) {
+        send(401);
+        return;
+    }
+    
     char *id = getParamValue("bid");
     int bid;
     if (*id) {
@@ -186,6 +218,12 @@ if (equals(method, "GET", false) && compareURI("/blocks/:bid/")) {
 }
 
 if (equals(method, "GET", false) && compareURI("/blocks/:bid/switches/")) {
+    int userId = secure();
+    if (!userId) {
+        send(401);
+        return;
+    }
+    
     char *id = getParamValue("bid");
     int bid;
     if (*id) {
@@ -210,6 +248,12 @@ if (equals(method, "GET", false) && compareURI("/blocks/:bid/switches/")) {
 }
 
 if (equals(method, "GET", false) && compareURI("/switches/")) {
+    int userId = secure();
+    if (!userId) {
+        send(401);
+        return;
+    }
+    
 
     write("[");
     int total = Switch :: total;
@@ -225,6 +269,12 @@ if (equals(method, "GET", false) && compareURI("/switches/")) {
 }
 
 if (equals(method, "GET", false) && compareURI("/switches/:id/")) {
+    int userId = secure();
+    if (!userId) {
+        send(401);
+        return;
+    }
+    
     char *id = getParamValue("id");
     if (id == NULL) {
         send(400);
@@ -247,6 +297,12 @@ if (equals(method, "GET", false) && compareURI("/switches/:id/")) {
 }
 
 if (equals(method, "PUT", false) && compareURI("/switches/:id/")) {
+    int userId = secure();
+    if (!userId) {
+        send(401);
+        return;
+    }
+    
     char *id = getParamValue("id");
     int sid;
     if (*id) {
@@ -296,6 +352,12 @@ if (equals(method, "PUT", false) && compareURI("/switches/:id/")) {
 }
 
 if (equals(method, "GET", false) && compareURI("/users/")) {
+    int userId = secure();
+    if (!userId) {
+        send(401);
+        return;
+    }
+    
 
     write("[");
     short int total = User :: total;
@@ -330,6 +392,12 @@ if (equals(method, "GET", false) && compareURI("/users/")) {
 }
 
 if (equals(method, "PUT", false) && compareURI("/users/")) {
+    int userId = secure();
+    if (!userId) {
+        send(401);
+        return;
+    }
+    
     StaticJsonBuffer<256> json; // 4 strings - 4*64 bytes
     JsonObject& data = json.parseObject(reqBody);
 
@@ -367,6 +435,12 @@ if (equals(method, "PUT", false) && compareURI("/users/")) {
 }
 
 if (equals(method, "GET", false) && compareURI("/users/:id/")) {
+    int userId = secure();
+    if (!userId) {
+        send(401);
+        return;
+    }
+    
     char *id = getParamValue("id");
     int uid;
     if (*id) {
@@ -407,6 +481,12 @@ if (equals(method, "GET", false) && compareURI("/users/:id/")) {
 }
 
 if (equals(method, "PUT", false) && compareURI("/users/:id/")) {
+    int userId = secure();
+    if (!userId) {
+        send(401);
+        return;
+    }
+    
     char *id = getParamValue("id");
     int uid;
     if (*id) {
@@ -488,6 +568,12 @@ if (equals(method, "PUT", false) && compareURI("/users/:id/")) {
 }
 
 if (equals(method, "DELETE", false) && compareURI("/users/:id/")) {
+    int userId = secure();
+    if (!userId) {
+        send(401);
+        return;
+    }
+    
     char *id = getParamValue("id");
     int uid;
     if (*id) {
