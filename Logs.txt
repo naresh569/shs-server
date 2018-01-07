@@ -1,0 +1,730 @@
+ 
+ ###### Fri Dec 8 00:53:40 IST 2017
+ > Initializing SHS.. 
+ > Initializing Ethernet.. 
+ > Initializing Web Server.. 
+ > Server is running at 192.168.0.90:5690..
+ > reqBody: {
+  "name": "Dharani Dhanasekhara",
+  "username": "dharanij2",
+  "pin": "123456",
+  "deviceUUId": "c60aa0446a1484e0"
+}
+ >>> POST /register/ HTTP/1.1
+ > reqBody: {
+  "name": "Dharani Dhanasekhara",
+  "username": "dharanij2",
+  "pin": "123456",
+  "deviceUUId": "c60aa0446a1484e0"
+}
+ >>> POST /register/ HTTP/1.1
+
+
+###### Fri Dec 8 23:18:40 IST 2017
+ > Initializing SHS.. 
+ > Initializing Ethernet.. 
+ > Initializing Web Server.. 
+ > Server is running at 192.168.0.90:5690..
+
+POST /register/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Content-Length: 88
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Cache-Control: no-cache
+Origin: chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop
+Postman-Token: 838d879f-eb31-5794-178f-355e8e681de8
+Content-Type: text/plain;charset=UTF-8
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
+ > BODY: {"name":"Dharani","username":"dharanij2","pin":"091620","deviceUUId":"83e205a274b82fd4"}
+ > SUCCESS: User created successfully..
+
+POST /authenticate/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Content-Length: 52
+Accept: application/json, text/plain, */*
+X-DevTools-Emulate-Network-Conditions-Client-Id: 18c71503-99b8-41a2-9fc7-3421c347508d
+Origin: file://
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > BODY: {"deviceUUId":"83e205a274b82fd4","userPin":"091620"}
+091620
+83e205a274b82fd4
+ > User found..
+ > user: Dharani
+ > Login successful..
+
+GET /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+X-DevTools-Emulate-Network-Conditions-Client-Id: 18c71503-99b8-41a2-9fc7-3421c347508d
+Authorization: Tokenfahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+X-DevTools-Emulate-Network-Conditions-Client-Id: 18c71503-99b8-41a2-9fc7-3421c347508d
+Authorization: Tokenfahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+POST /authenticate/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Content-Length: 52
+Accept: application/json, text/plain, */*
+Origin: file://
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > BODY: {"deviceUUId":"83e205a274b82fd4","userPin":"091620"}
+091620
+83e205a274b82fd4
+ > User found..
+ > user: Dharani
+ > Login successful..
+
+GET /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /switches/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /switches/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /blocks/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /blocks/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > Switches for block - 1
+
+GET /blocks/1/switches/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+PUT /switches/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Content-Length: 14
+Accept: application/json, text/plain, */*
+Origin: file://
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > BODY: {"status":"5"}
+{"status":"5"}
+
+PUT /switches/3/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Content-Length: 14
+Accept: application/json, text/plain, */*
+Origin: file://
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > BODY: {"status":"5"}
+{"status":"5"}
+
+GET /blocks/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /blocks/3/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > Switches for block - 3
+
+GET /blocks/3/switches/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+PUT /switches/10/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Content-Length: 14
+Accept: application/json, text/plain, */*
+Origin: file://
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > BODY: {"status":"5"}
+{"status":"5"}
+
+PUT /switches/8/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Content-Length: 14
+Accept: application/json, text/plain, */*
+Origin: file://
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > BODY: {"status":"5"}
+{"status":"5"}
+
+PUT /switches/12/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Content-Length: 14
+Accept: application/json, text/plain, */*
+Origin: file://
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > BODY: {"status":"5"}
+{"status":"5"}
+
+GET /blocks/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /switches/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /blocks/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /users/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+PUT /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Content-Length: 37
+Accept: application/json, text/plain, */*
+Origin: file://
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > BODY: {"newPin":"123456","curPin":"091620"}
+
+PUT /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Content-Length: 20
+Accept: application/json, text/plain, */*
+Origin: file://
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > BODY: {"deactivated":true}
+
+GET /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+PUT /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Content-Length: 21
+Accept: application/json, text/plain, */*
+Origin: file://
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > BODY: {"deactivated":false}
+
+GET /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+PUT /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Content-Length: 17
+Accept: application/json, text/plain, */*
+Origin: file://
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > BODY: {"accessLevel":1}
+
+GET /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+PUT /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Content-Length: 17
+Accept: application/json, text/plain, */*
+Origin: file://
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > BODY: {"accessLevel":2}
+
+GET /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+PUT /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Content-Length: 31
+Accept: application/json, text/plain, */*
+Origin: file://
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+ > BODY: {"name":"Dharani Dhanasekhara"}
+
+GET /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /users/1/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+GET /overview/ HTTP/1.1
+Host: 192.168.0.90:5690
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: Token fahohfaoifodfshohfoashfosnaoh0
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi Note 3 Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: en-GB,en-US;q=0.9
+X-Requested-With: io.ionic.starter
+
+
+
+
+
+
+###### Sat Dec 23 23:25:00 IST 2017
+cwhwcgiuvlkqqxdmxdwipsuauxgibtvejhllgmkcnwwgzfdvtp
+
+cwhwcgiuvlkqqxdmxdwipsuauxgibtvejhllgmkcnwwgzfdvtp
+ouvycaxktwxarocumchhxyppyuykqjkuckfrjvrvjhdytgnoaw
+
+vxmpajasabdwnbswsywgxnusbxzidyemyxjthuyeduheuguncd
+sxgnjeysgpozjtkyrwwotuhlspanssxuthdiohzifxberxuinv
+rjjzusrgzouvwgmptbfksirxhhtpeunvfrijyidspmpeujqiny
+btzsdkflnmjoqbhtwsyrolhgkjmwjyutcwrgbnapexgxemblav
+
+cwhwcgiuvlkqqxdmxdwipsuauxgibtvejhllgmkcnwwgzfdvtp
+
+###### Mon Dec 25 13:10:14 IST 2017
+
+C:\Program Files (x86)\Arduino\libraries\Ethernet\src
+
+C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino
+
+###### Mon Dec 25 15:01:20 IST 2017
+Arduino: 1.8.5 (Windows 10), Board: "Arduino/Genuino Mega or Mega 2560, ATmega2560 (Mega 2560)"
+
+c:\program files (x86)\arduino\hardware\tools\avr\bin\../lib/gcc/avr/4.9.2/../../../../avr/bin/ar.exe: unable to rename 'core\core.a'; reason: File exists
+
+exit status 1
+Error compiling for board Arduino/Genuino Mega or Mega 2560.
+
+This report would have more information with
+"Show verbose output during compilation"
+option enabled in File -> Preferences.
+
+
+###### Wed Dec 27 21:40:21 IST 2017
+Serial.print(" > Overview host: ");
+Serial.println(headers->get("Host")->value);
+// headers->display();
+
+
+###### Sun Dec 31 10:56:53 IST 2017
+[{"userId":1,"name":"Dharani Dhanasekhara","username":"dharanij2","pin":"123456","deviceUUId":"c60aa0446a1484e0","accessLevel":2,"deactivated":false},{"userId":2,"name":"Naresh Dhanasekhara","username":"naresh569","pin":"123656","deviceUUId":"c60aa0446a1484e1","accessLevel":1,"deactivated":true}]
+
+
+###### Sun Dec 31 11:35:14 IST 2017
+[{"userId":1,"name":"Dharani Dhanasekhara","username":"dharanij2","pin":"123456","deviceUUId":"c60aa0446a1484e0","accessLevel":2,"deactivated":false},{"userId":2,"name":"Naresh Dhanasekhara","username":"naresh569","pin":"123656","deviceUUId":"c60aa0446a1484e1","accessLevel":1,"deactivated":true},{"userId":3,"name":"Saravana Dhanasekhara","username":"saravanaj11","pin":"123543","deviceUUId":"c60aa0446a1484e2","accessLevel":1,"deactivated":true},{"userId":4,"name":"Lakshmi Dhanasekhara","username":"lakshmi","pin":"123756","deviceUUId":"c60aa0446a1484e3","accessLevel":1,"deactivated":true},{"userId":5,"name":"Dhanasekhara","username":"dhanasekhara","pin":"123756","deviceUUId":"c60aa0446a1484e4","accessLevel":1,"deactivated":true},{"userId":6,"name":"Latha","username":"latha","pin":"091620","deviceUUId":"c60aa0446a1484e5","accessLevel":1,"deactivated":true},{"userId":7,"name":"Lavanya","username":"lavanya","pin":"123756","deviceUUId":"c60aa0446a1484e6","accessLevel":1,"deactivated":true},{"userId":8,"name":"Uma","username":"uma1627","pin":"123756","deviceUUId":"c60aa0446a1484e7","accessLevel":1,"deactivated":true},{"userId":9,"name":"Sai","username":"sai","pin":"123756","deviceUUId":"c60aa0446a1484e8","accessLevel":1,"deactivated":true},{"userId":10,"name":"Shafi","username":"shafi","pin":"123756","deviceUUId":"c60aa0446a1484e9","accessLevel":1,"deactivated":true}]
+
+
+1383 bytes
+
+###### Sat Jan 6 20:06:49 IST 2018
+User :: addUser("Dharani Dhanasekhara", "dharanij2", "123456", "c60aa0446a1484e0");
+User :: addUser("Naresh Dhanasekhara", "naresh569", "123656", "c60aa0446a1484e1");
+User :: addUser("Saravana Dhanasekhara", "saravanaj11", "123543", "c60aa0446a1484e2");
+User :: addUser("Lakshmi Dhanasekhara", "lakshmi", "123756", "c60aa0446a1484e3");
+User :: addUser("Dhanasekhara", "dhanasekhara", "123756", "c60aa0446a1484e4");
+User :: addUser("Latha", "latha", "091620", "c60aa0446a1484e5");
+// User :: addUser("Lavanya", "lavanya", "123756", "c60aa0446a1484e6");
+// User :: addUser("Uma", "uma1627", "123756", "c60aa0446a1484e7");
+// User :: addUser("Sai", "sai", "123756", "c60aa0446a1484e8");
+// User :: addUser("Shafi", "shafi", "123756", "c60aa0446a1484e9");
+// User :: addUser("Sheran", "sheran", "123756", "c60aa0446a1484f0");
+
+// Block* block2 = Block :: addBlock("Block 2", "Contains the second set of 12 Switches..");
+// Block* block3 = Block :: addBlock("Block 3", "Contains the third set of 12 Switches..");
+// block1->addSwitch('2', 18, "Water Motor", "Will pump the water from ground tank to top tank");
+// Block :: addBlock("Block 4", "Contains the forth set of 12 Switches..");
+
+
+###### Sun Jan 7 16:34:19 IST 2018
+  [
+    {"userId":1,"name":"Dharani Dhanasekhara","username":"dharanij2","pin":"123456","deviceUUId":"c60aa0446a1484e0","accessLevel":2,"deactivated":false},
+    {"userId":2,"name":"Naresh Dhanasekhara","username":"naresh569","pin":"123656","deviceUUId":"c60aa0446a1484e1","accessLevel":1,"deactivated":true}
+  ]
+
+###### Sun Jan 7 20:33:16 IST 2018
+fgsakzhidtoksceiqusxuiytobmklelkikzqmkertnxusmzrck
+fgsakzhidtoksceiqusxuiytobmklelkikzqmkertnxusmzrck
+
+
+###### Mon Jan 8 01:12:47 IST 2018
+Storage s;
+s.write("[{\"userId\":2,\"name\":\"Naresh Dhanasekhara\",\"username\":\"dns\",\"pin\":\"123456\",\"deviceUUId\":\"83e205a274b82fd4\",\"accessLevel\":2,\"deactivated\":false}]");
+s.write("");

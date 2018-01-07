@@ -5,9 +5,9 @@
 #define SIZENORMAL 64
 #define SIZELONG 250
 
-#define MAXBLOCKS 10
-#define MAXSWITCHES 50
-#define MAXUSERS 10
+#define MAXBLOCKS 1
+#define MAXSWITCHES 12
+#define MAXUSERS 5
 
 #define LENGTHTOKEN 50
 

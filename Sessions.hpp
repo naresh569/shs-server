@@ -8,7 +8,6 @@ class Session {
         int userId;
         char* token;
         char* timeOfStart;
-        bool isValid;
 
         Session(int);
         ~Session();
@@ -33,7 +32,6 @@ Session :: Session(int puserId) {
     generateToken();
 
     timeOfStart = "";
-    isValid = true;
 
     total++;
 }

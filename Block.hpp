@@ -11,6 +11,7 @@ class Block {
         int sTotal;
         int switchIds[MAXSWITCHES];
         Block();
+        ~Block();
         Block(const char*, const char*);
         Switch* addSwitch(char , int , char*, char*);
 
@@ -28,6 +29,10 @@ Block :: Block() {
     sTotal = 0;
 
     total++;
+}
+
+Block :: ~Block() {
+    total--;
 }
 
 Block :: Block(const char* lbl, const char* dsc) {

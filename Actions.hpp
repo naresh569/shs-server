@@ -31,24 +31,22 @@ if (equals(method, "POST", false) && compareURI("/register/")) {
     const char* deviceUUId = data["deviceUUId"];
 
     if (!name || !username || !pin || !deviceUUId) {
-        // send(400);
         send("{\"success\": false, \"message\": \"Registration Failed!\"}");
         return;
     }
 
-    // short int newIndex = User :: total; // some problem..
     User* usr = User :: addUser(name, username, pin, deviceUUId);
-    if (usr) {
-        send("{\"success\": true, \"message\": \"Registration Successful!\"}");
-    } else {
+    // Check whether the user created or not
+    if (!usr) {
         send("{\"success\": false, \"message\": \"Registration Failed!\"}");
+        return;
     }
 
-    // I put the below code for debugging purpose
-    // Serial.println(" > USERS: ");
-    // for (int i = 0; i < User :: total; i++) {
-    //     Serial.println(users[i]->name);
-    // }
+    // SUCCESS - Registration
+    Serial.println(" > SUCCESS: User Created.");
+    send("{\"success\": true, \"message\": \"Registration Successful!\"}");
+    saveUsers(); // Push the changes to Storage
+
     return;
 }
 
@@ -60,47 +58,44 @@ if (equals(method, "POST", false) && compareURI("/authenticate/")) {
     const char* deviceUUId = data["deviceUUId"];
 
     if (pin == NULL || deviceUUId == NULL) {
+        Serial.println(" > ERROR: Invalid Data!");
         send(400);
         return;
     }
 
-    // Serial.println(pin);
-    // Serial.println(deviceUUId);
-
     short int index = -1;
-    for (int i = 0; i < User :: total; i++) {
+    for (int i = 0; i < MAXUSERS; i++) {
+        if (users[i] == NULL)
+        continue;
         if (equals(users[i]->deviceUUId, deviceUUId, true)) {
-            // Serial.println(" > User found..");
-            // Serial.print(" > user: ");
-            // Serial.println(users[i]->name);
             index = i;
             break; // first occurence
         }
     }
 
+    // Check whether the user exists or not
     if (index < 0) {
-        // User not found
-        send("{\"success\": false, \"message\": \"User Does Not Exist.\"}");
-        // send("{\"success\": false, \"message\": \"Invalid User Credentials.\"}");
-        return;
-    }
-
-    if (!equals(users[index]->pin, pin, true)) {
-        // Invalid pin
+        Serial.println(" > ERROR: User Does Not Exist!");
+        // send("{\"success\": false, \"message\": \"User Does Not Exist.\"}");
         send("{\"success\": false, \"message\": \"Invalid User Credentials.\"}");
         return;
     }
 
+    // Check whether the given pin is valid
+    if (!equals(users[index]->pin, pin, true)) {
+        send("{\"success\": false, \"message\": \"Invalid User Credentials.\"}");
+        return;
+    }
+
+    // Check whether the user is deactivated
     if (users[index]->deactivated) {
-        // User is deactivated
         send("{\"success\": false, \"message\": \"Inactive User ID. Please Contact ADMIN.\"}");
         return;
     }
 
-    Serial.println(" > Login successful..");
+    // SUCCESS - Login
     Session* s = Session :: createSession(users[index]->_id);
     char* token = s->getToken();
-    // Session :: display();
     write("{\"success\":true, \"message\": \"Login Successful.\", ");
     write("\"token\": \"");
     write(token);
@@ -108,6 +103,7 @@ if (equals(method, "POST", false) && compareURI("/authenticate/")) {
     write(users[index]->_id);
     write("}");
     write("");
+
     return;
 }
 
@@ -358,10 +354,12 @@ if (equals(method, "GET", false) && compareURI("/users/")) {
         return;
     }
     
-
     write("[");
-    short int total = User :: total;
-    for (int i = 0; i < total; i++) {
+    int count = 0;
+    for (int i = 0; i < MAXUSERS; i++) {
+        if (users[i] == NULL)
+        continue;
+        count++;
         write("{");
         write("\"_id\": ");
         write(users[i]->_id);
@@ -382,55 +380,12 @@ if (equals(method, "GET", false) && compareURI("/users/")) {
         write("\"");
         write("}");
 
-        if(i != total-1)
+        if(count != User :: total)
         write(", ");
     }
     write("]");
 
     write(""); // Note: Chunked transfer of DATA always end with EMPTY line
-    return;
-}
-
-if (equals(method, "PUT", false) && compareURI("/users/")) {
-    int userId = secure();
-    if (!userId) {
-        send(401);
-        return;
-    }
-    
-    StaticJsonBuffer<256> json; // 4 strings - 4*64 bytes
-    JsonObject& data = json.parseObject(reqBody);
-
-    const char* name = data["name"];
-    const char* username = data["username"];
-    const char* pin = data["pin"];
-    const char* deviceUUId = data["deviceUUId"];
-    Serial.println(name);
-    Serial.println(username);
-    Serial.println(pin);
-    Serial.println(deviceUUId);
-
-    if (!name || !username || !pin || !deviceUUId) {
-        // send(400);
-        send("{\"success\": false, \"message\": \"Registration Failed!\"}");
-        return;
-    }
-
-    User* usr = User :: addUser(name, username, pin, deviceUUId);
-    if (!usr) { // no error
-        write("{\"success\": true, \"message\": \"User Added Successfully!\", \"id\":"); // 
-        short int pos = User :: total; // position always will the index + 1
-        write(pos);
-        write("}");
-        write(""); // Note: Chunked transfer of DATA always end with EMPTY line
-    } else {
-        send("{\"success\": false, \"message\": \"Registration Failed!\"}");
-    }
-    // } else if (user == 1) {
-    //     send("{\"success\": false, \"message\": \"User Already Exists!\"}");
-    // } else if (user == 2) {
-    //     send("{\"success\": false, \"message\": \"Max Users Reached!\"}");
-    // }
     return;
 }
 
@@ -447,9 +402,10 @@ if (equals(method, "GET", false) && compareURI("/users/:id/")) {
         uid = toInt(id);
     }
 
-    short int index = -1;
-    short int total = User :: total;
-    for (int i = 0; i < total; i++) {
+    int index = -1;
+    for (int i = 0; i < MAXUSERS; i++) {
+        if (users[i] == NULL)
+        continue;
         if (users[i]->_id == uid) {
             index = i;
         }
@@ -503,9 +459,8 @@ if (equals(method, "PUT", false) && compareURI("/users/:id/")) {
         return;
     }
     
-    short int total = User :: total;
     short int index = uid - 1; // index will be always id - 1
-    if (index < 0 || index >= total) {
+    if (index < 0 || index >= MAXUSERS) {
         // If user id validation fails or user does not exist
         send("{\"success\": false, \"message\": \"User Not Found!\"}");
         return;
@@ -513,7 +468,7 @@ if (equals(method, "PUT", false) && compareURI("/users/:id/")) {
     
     bool success = true;
 
-    StaticJsonBuffer<256> json; // 4 strings - 4*64 bytes
+    StaticJsonBuffer<400> json; // 4 strings - 4*64 bytes
     JsonObject& data = json.parseObject(reqBody);
 
     // UPDATE - pin
@@ -564,6 +519,8 @@ if (equals(method, "PUT", false) && compareURI("/users/:id/")) {
     } else {
         send("{\"success\": false, \"message\": \"Operation Failed!\"}");
     }
+
+    saveUsers();
     return;
 }
 
@@ -584,15 +541,13 @@ if (equals(method, "DELETE", false) && compareURI("/users/:id/")) {
         return;
     }
 
-    short int total = User :: total;
-    short int index = uid - 1; // index will be always id - 1
-    if (index < 0 || index >= total) {
+    int index = uid - 1; // index will be always id - 1
+    if (index < 0 || index >= MAXUSERS) {
         // If user id validation fails or user does not exist
         send("{\"success\": false, \"message\": \"User Not Found!\"}");
         return;
     }
 
-    // *** Logic is pending.. ***
     users[index] = NULL;
     send("{\"success\": true, \"message\": \"Operation Success!\"}");
     return;

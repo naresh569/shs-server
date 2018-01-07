@@ -13,17 +13,19 @@ class User {
         bool deactivated;
 
         static User* addUser(const char *, const char *, const char *, const char *);
+        static User* addUser(int, const char *, const char *, const char *, const char *, int, bool);
         static int total;
 
-        User(const char *pname, const char *puname, const char *ppin, const char *uuid);
+        User(int, const char *, const char *, const char *, const char *);
+        User (int, const char *, const char *, const char *, const char *, int, bool);
         ~User();
 } *users[MAXUSERS];
 
 int User :: total = 0;
 
-User :: User (const char *pname, const char *puname, const char *ppin, const char *uuid) {
+User :: User (int puserid, const char *pname, const char *puname, const char *ppin, const char *uuid) {
 
-    _id = total + 1;
+    _id = puserid;
 
     name = new char[SIZENORMAL];
     name[0] = 0;
@@ -59,6 +61,33 @@ User :: User (const char *pname, const char *puname, const char *ppin, const cha
     total++;
 }
 
+User :: User (int pUserId, const char *pname, const char *puname, const char *ppin, const char *uuid, int pAccessLevel, bool pDeactivated) {
+
+    _id = pUserId;
+
+    name = new char[SIZENORMAL];
+    name[0] = 0;
+    concat(name, pname);
+
+    username = new char[SIZENORMAL];
+    username[0] = 0;
+    concat(username, puname);
+
+    pin = new char[SIZENORMAL];
+    pin[0] = 0;
+    concat(pin, ppin);
+
+    deviceUUId = new char[SIZENORMAL];
+    deviceUUId[0] = 0;
+    concat(deviceUUId, uuid);
+
+    accessLevel = pAccessLevel;
+
+    deactivated = pDeactivated;
+
+    total++;
+}
+
 User :: ~User () {
     // Still pending..
     // Care need to be taken when deleting one object
@@ -67,36 +96,80 @@ User :: ~User () {
 }
 
 User* User :: addUser(const char *pname, const char *puname, const char *ppin, const char *uuid) {
-
-    // finding if the username or deviceUUId already exists
-    short int index = -1, total = User :: total;
-    for (int i = 0; i < total; i++) {
+    
+    int index = -1;
+    bool found = false;
+    for (int i = 0; i < MAXUSERS; i++) {
+        if (users[i] == NULL) {
+            index = index < 0 ? i : index;
+            continue;
+        }
         if (equals(users[i]->deviceUUId, uuid, true)) {
-            index = i;
+            found = true;
             break; // first occurence
         }
         if (equals(users[i]->username, puname, true)) {
-            index = i;
+            found = true;
             break; // first occurence
         }
     }
 
-    if (index > -1) {
-        // User already exists
-        // return 1;
+    // Check wether the user already exists..
+    if (found) {
         Serial.println(" > ERROR: User already exists..");
         return NULL;
     }
 
-    if (total == MAXUSERS) {
-        // No place for new user
-        // return 2;
+    // Check wether the space is available for new user
+    if (index == -1 || User :: total == MAXUSERS) {
         Serial.println(" > ERROR: Limit for max users reached..");
         return NULL;
     }
 
-    users[total] = new User (pname, puname, ppin, uuid);
+    users[index] = new User (index + 1, pname, puname, ppin, uuid);
     Serial.println(" > SUCCESS: User created successfully..");
-    return users[total];
+    return users[index];
+
+}
+
+User* User :: addUser(int pUserId, const char *pname, const char *puname, const char *ppin, const char *uuid, int pAccessLevel, bool pDeactivated) {
+
+    bool found = false;
+    for (int i = 0; i < MAXUSERS; i++) {
+        if (users[i] == NULL)
+        continue;
+        if (equals(users[i]->deviceUUId, uuid, true)) {
+            found = true;
+            break; // first occurence
+        }
+        if (equals(users[i]->username, puname, true)) {
+            found = true;
+            break; // first occurence
+        }
+    }
+
+    // Check wether the user already exists..
+    if (found) {
+        Serial.println(" > ERROR: User already exists..");
+        return NULL;
+    }
+
+    // Check wether the space is available for new user
+    if (User :: total == MAXUSERS) {
+        Serial.println(" > ERROR: Limit for max users reached..");
+        return NULL;
+    }
+
+    // If pUserId is available, then the user should be placed in the
+    // position (pUserId - 1).
+    // Check wether the position available or not
+    if (users[pUserId - 1] != NULL) {
+        Serial.println(" > ERROR: Requested postion not available..");
+        return NULL;
+    }
+    
+    users[pUserId - 1] = new User (pUserId, pname, puname, ppin, uuid, pAccessLevel, pDeactivated);
+    Serial.println(" > SUCCESS: User created successfully..");
+    return users[pUserId - 1];
 
 }

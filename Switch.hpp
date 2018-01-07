@@ -12,6 +12,7 @@ class Switch {
         char *desc;
         bool lock;
         Switch(char, int,  char *, char *);
+        ~Switch();
 
         // Common static variables
         static int total;
@@ -56,6 +57,10 @@ Switch :: Switch(char ptype, int ppin, char *ptitle, char *pdesc){ // params
     desc = pdesc;
 
     total++;
+}
+
+Switch :: ~Switch() {
+    total--;
 }
 
 char* Switch :: getDetails(){

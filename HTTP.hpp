@@ -126,7 +126,6 @@ int HTTP :: readRequest() {
 
             // Serial.print(" > Method: ");
             // Serial.println(method);
-            Serial.println();
             Serial.print(method);
             Serial.print(" ");
         }

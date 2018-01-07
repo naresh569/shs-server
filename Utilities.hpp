@@ -2,7 +2,7 @@
 #pragma once
 #include "Config.hpp"
 
-int length(char *inp){
+int length(char *inp) {
     int count = 0;
     for (int i=0; inp[i] != '\0'; i++) {
         count++;
@@ -10,7 +10,7 @@ int length(char *inp){
     return count;
 }
 
-void concat(char *str1, char const *str2){
+void concat(char *str1, char const *str2) {
     int i = 0, j = 0;
     while (str1[i] != '\0')
     i++;
@@ -21,7 +21,7 @@ void concat(char *str1, char const *str2){
     str1[i] = '\0';
 }
 
-void concat(char *str1, bool str2){
+void concat(char *str1, bool str2) {
     int i = 0;
     while (str1[i] != '\0')
     i++;
@@ -35,7 +35,7 @@ void concat(char *str1, bool str2){
     str1[i] = '\0';
 }
 
-void concat(char *str1, char str2){
+void concat(char *str1, char str2) {
     int i = 0;
     while (str1[i] != '\0')
     i++;
@@ -45,7 +45,7 @@ void concat(char *str1, char str2){
     str1[i] = '\0';
 }
 
-void concat(char *str1, int str2){
+void concat(char *str1, int str2) {
     int i = 0;
     while (str1[i] != '\0')
     i++;
@@ -61,7 +61,7 @@ void concat(char *str1, int str2){
         str2 = -str2;
     }
 
-    char temp[6] = "";
+    char temp[SIZESHORT] = "";
     int j = 0, count = 0;
     while (str2 != 0) {
         temp[j++] = (char) 48 + (str2 % 10);
@@ -76,8 +76,7 @@ void concat(char *str1, int str2){
     str1[i] = '\0';
 }
 
-
-bool equals(char const *first, char const *second, bool caseSensitive){
+bool equals(char const *first, char const *second, bool caseSensitive) {
     if (first == NULL || *first == '\0') {
         // Serial.println(" > ERROR: NULL or empty string argument..!");
         return false;
@@ -108,7 +107,7 @@ bool equals(char const *first, char const *second, bool caseSensitive){
     }
 }
 
-int toInt(char const *s){
+int toInt(char const *s) {
     if ( s == NULL || *s == '\0' ) {
         // Serial.println(" > ERROR: NULL or empty string argument..!");
         return 0;

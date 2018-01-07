@@ -1,3 +1,5 @@
+void initUsers();
+void saveUsers();
 
 #include <SPI.h>
 #include <Ethernet.h>
@@ -7,9 +9,11 @@
 #include "Switch.hpp"
 #include "Block.hpp"
 #include "Users.hpp"
+#include "Storage.hpp"
 #include "Sessions.hpp"
 #include "HTTP.hpp"
 #include "Actions.hpp"
+
 
 EthernetServer server(SERVER_PORT);
 
@@ -20,48 +24,84 @@ byte mac[] = {
 };
 IPAddress ip(192, 168, 0, 90);
 
+void initUsers() {
+  Storage* s = new Storage();
+  char* users = s->get();
+  
+  StaticJsonBuffer<1536> jsonBuffer;
+  JsonArray& ulist = jsonBuffer.parseArray(users);
+
+  for (int i = 0; i < ulist.size(); i++) {
+    User :: addUser(ulist[i]["userId"], ulist[i]["name"], ulist[i]["username"],  ulist[i]["pin"],  ulist[i]["deviceUUId"], ulist[i]["accessLevel"], ulist[i]["deactivated"]);
+  }
+
+  Serial.print(" > Total no. of users: ");
+  Serial.println(User :: total);
+}
+
+void saveUsers() {
+  Storage s;
+  int count = 0;
+  s.write("[");
+  for (int i = 0; i < MAXUSERS; i++) {
+    if (users[i] == NULL)
+    continue;
+    count++;
+    s.write("{\"userId\":");
+    s.write(users[i]->_id);
+    s.write(",\"name\":\"");
+    s.write(users[i]->name);
+    s.write("\",\"username\":\"");
+    s.write(users[i]->username);
+    s.write("\",\"pin\":\"");
+    s.write(users[i]->pin);
+    s.write("\",\"deviceUUId\":\"");
+    s.write(users[i]->deviceUUId);
+    s.write("\",\"accessLevel\":");
+    s.write(users[i]->accessLevel);
+    s.write(",\"deactivated\":");
+    if (users[i]->deactivated)
+    s.write("true");
+    else
+    s.write("false");
+    s.write('}');
+    if (count != User :: total)
+    s.write(',');
+  }
+  s.write(']');
+  s.write("");
+} 
+
 void shsInitialize() {
 
-  // User :: addUser("Dharani Dhanasekhara", "dharanij2", "123456", "c60aa0446a1484e0");
+  Serial.println(" > Initializing Users.. ");
+  initUsers();
 
-  /* 
-  addSwitch(
-    Switch Type - Char
-    Assigned Pin - Number
-    Title - String
-    Desc - String
-  )
-   */
-  
   Block* block1 = Block :: addBlock("Block 1", "Contains the fisrt set of 12 Switches..");
   block1->addSwitch('1',  2, "Main Light", "The CFL (Compact Fluroscent Light) Bulb located in the Hall center");
   block1->addSwitch('2',  3, "Fan", "Fan in the bedr room");
   block1->addSwitch('2',  3, "Fan", "Fan in the bedr room");
-
-  Block* block2 = Block :: addBlock("Block 2", "Contains the second set of 12 Switches..");
-  block2->addSwitch('1',  4, "Light 1", "Light in the hall back");
-  block2->addSwitch('1',  5, "Light 2", "Light in the hall front");
-  block2->addSwitch('1',  6, "Bed Light", "Attached to right side wall of hall");
-  block2->addSwitch('2',  7, "Fan 1", "Main fan in the hall just above the sofa");
-
-  Block* block3 = Block :: addBlock("Block 3", "Contains the third set of 12 Switches..");
-  block3->addSwitch('2',  8, "Fan 2", "Main fan in the hall before stairs");
-  block3->addSwitch('3', 14, "Socket 1", "Triple way plug socket in hall near sofa");
-  block3->addSwitch('3', 15, "Socket 2", "Triple way plug socket in the bedroom");
-  block3->addSwitch('3', 16, "Socket 3", "Triple way plug socket for heavey use");
-  block3->addSwitch('3', 17, "Socket 4", "Triple way plug socket in the kichen");
-  block3->addSwitch('2', 18, "Water Motor", "Will pump the water from ground tank to top tank");
-
-  Block :: addBlock("Block 4", "Contains the forth set of 12 Switches..");
+  block1->addSwitch('1',  4, "Light 1", "Light in the hall back");
+  block1->addSwitch('1',  5, "Light 2", "Light in the hall front");
+  block1->addSwitch('1',  6, "Bed Light", "Attached to right side wall of hall");
+  block1->addSwitch('2',  7, "Fan 1", "Main fan in the hall just above the sofa");
+  block1->addSwitch('2',  8, "Fan 2", "Main fan in the hall before stairs");
+  block1->addSwitch('3', 14, "Socket 1", "Triple way plug socket in hall near sofa");
+  block1->addSwitch('3', 15, "Socket 2", "Triple way plug socket in the bedroom");
+  block1->addSwitch('3', 16, "Socket 3", "Triple way plug socket for heavey use");
+  block1->addSwitch('3', 17, "Socket 4", "Triple way plug socket in the kichen");
 
 }
   
 void setup() {
-
   randomSeed(analogRead(0));
+
+  Storage s;
+  s.clear();
 
   // Initialize serial communication at 9600 bits per second
   Serial.begin(9600);
+  Serial.println();
   Serial.println(" > Initializing SHS.. ");
   shsInitialize();
 
@@ -77,7 +117,6 @@ void setup() {
   Serial.print(":");
   Serial.print(SERVER_PORT);
   Serial.println("..");
-  
 }
 
 void loop() {
